@@ -34,6 +34,7 @@ data = [
 const itemsWrapper = document.querySelector('.items')
 const properties = document.querySelector('.propertys')
 const propertiesName = document.querySelector('.properties__name')
+const propertiesId = document.querySelector('.properties__id')
 const propertiesWeight = document.querySelector('#weight')
 const propertiesArmor = document.querySelector('#armor')
 const propertiesButton = document.querySelector('.properties__submit')
@@ -57,19 +58,18 @@ const renderItems = () => {
 
 const renderProperties = item => {
 	propertiesName.textContent = item.name.toUpperCase()
+	propertiesId.textContent = item.id
 	propertiesWeight.value = item.attributes.weight
 	propertiesArmor.value = item.attributes.armor
 }
 
 
+propertiesButton.addEventListener('click',  (event) => {
+	event.preventDefault()
+	const item = data.find(item => item.id === propertiesId.textContent)
+	item.attributes.weight = parseInt(propertiesWeight.value)
+	item.attributes.armor = parseInt(propertiesArmor.value)
+	console.log(item)
+})
 
 renderItems()
-console.log(data);
-
-
-
-// const changeItem = (id, x) => {
-// 	const item = items.find(item => item.id === id)
-// 	item.attributes.weight = x
-// 	console.log(item)
-// }
